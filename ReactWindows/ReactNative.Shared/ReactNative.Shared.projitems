@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -22,7 +22,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Bridge\IPromise.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bridge\IReactBridge.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bridge\IReactCallback.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Bridge\IReactContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bridge\IReactDelegateFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bridge\IReactInstance.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Bridge\JavaScriptModuleBase.cs" />

@@ -33,7 +33,7 @@ namespace ReactNative.DevSupport
         private bool _isDevSupportEnabled = true;
         private bool _isShakeDetectorRegistered;
 
-        private IReactContext _currentContext;
+        private ReactContext _currentContext;
         private RedBoxDialog _redBoxDialog;
         private Action _dismissRedBoxDialog;
         private bool _redBoxDialogOpen;
@@ -292,12 +292,12 @@ namespace ReactNative.DevSupport
             }
         }
 
-        public void OnNewReactContextCreated(IReactContext context)
+        public void OnNewReactContextCreated(ReactContext context)
         {
             ResetCurrentContext(context);
         }
 
-        public void OnReactContextDestroyed(IReactContext context)
+        public void OnReactContextDestroyed(ReactContext context)
         {
             if (context == _currentContext)
             {
@@ -374,7 +374,7 @@ namespace ReactNative.DevSupport
             _devServerHelper.Dispose();
         }
 
-        private void ResetCurrentContext(IReactContext context)
+        private void ResetCurrentContext(ReactContext context)
         {
             if (_currentContext == context)
             {

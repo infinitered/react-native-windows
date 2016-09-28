@@ -437,7 +437,7 @@ namespace ReactNative.Tests.UIManager.Events
             return reactInstance.InitializeBridgeAsync();
         }
 
-        private static IDisposable BlockJavaScriptThread(IReactContext reactContext)
+        private static IDisposable BlockJavaScriptThread(ReactContext reactContext)
         {
             var enter = new AutoResetEvent(false);
             var exit = new AutoResetEvent(false);

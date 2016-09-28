@@ -16,7 +16,7 @@ namespace ReactNative.UIManager
         /// <param name="viewManagers">The view managers.</param>
         /// <returns></returns>
         public UIImplementation Create(
-            IReactContext reactContext, 
+            ReactContext reactContext, 
             IReadOnlyList<IViewManager> viewManagers)
         {
             return new UIImplementation(reactContext, viewManagers);

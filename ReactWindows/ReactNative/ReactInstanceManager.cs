@@ -127,7 +127,7 @@ namespace ReactNative
         /// <summary>
         /// Gets the current React context instance.
         /// </summary>
-        public IReactContext CurrentReactContext
+        public ReactContext CurrentReactContext
         {
             get
             {
@@ -358,7 +358,7 @@ namespace ReactNative
         /// The application context.
         /// </param>
         /// <returns>The list of view managers.</returns>
-        public IReadOnlyList<IViewManager> CreateAllViewManagers(IReactContext reactContext)
+        public IReadOnlyList<IViewManager> CreateAllViewManagers(ReactContext reactContext)
         {
             if (reactContext == null)
                 throw new ArgumentNullException(nameof(reactContext));
@@ -537,7 +537,7 @@ namespace ReactNative
             reactInstance.GetJavaScriptModule<AppRegistry>().unmountApplicationComponentAtRootTag(rootView.GetTag());
         }
 
-        private void TearDownReactContext(IReactContext reactContext)
+        private void TearDownReactContext(ReactContext reactContext)
         {
             DispatcherHelpers.AssertOnDispatcher();
 
@@ -628,7 +628,7 @@ namespace ReactNative
 
         private void ProcessPackage(
             IReactPackage reactPackage,
-            IReactContext reactContext,
+            ReactContext reactContext,
             NativeModuleRegistry.Builder nativeRegistryBuilder,
             JavaScriptModuleRegistry.Builder jsModulesBuilder)
         {
@@ -643,7 +643,7 @@ namespace ReactNative
             }
         }
 
-        private void MoveReactContextToCurrentLifecycleState(IReactContext reactContext)
+        private void MoveReactContextToCurrentLifecycleState(ReactContext reactContext)
         {
             if (_lifecycleState == LifecycleState.Resumed)
             {
@@ -651,7 +651,7 @@ namespace ReactNative
             }
         }
 
-        private void OnReactContextInitialized(IReactContext reactContext)
+        private void OnReactContextInitialized(ReactContext reactContext)
         {
             ReactContextInitialized?
                 .Invoke(this, new ReactContextInitializedEventArgs(reactContext));

@@ -12,7 +12,7 @@ namespace ReactNative.Bridge
         /// Instantiates the <see cref="ReactContextNativeModuleBase"/>.
         /// </summary>
         /// <param name="reactContext">The React context.</param>
-        protected ReactContextNativeModuleBase(IReactContext reactContext)
+        protected ReactContextNativeModuleBase(ReactContext reactContext)
         {
             if (reactContext == null)
                 throw new ArgumentNullException(nameof(reactContext));
@@ -23,6 +23,6 @@ namespace ReactNative.Bridge
         /// <summary>
         /// The React context.
         /// </summary>
-        public IReactContext Context { get; }
+        public ReactContext Context { get; }
     }
 }

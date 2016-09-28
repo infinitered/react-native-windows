@@ -11,7 +11,7 @@ namespace ReactNative.Bridge
     /// Abstract context wrapper for the React instance to manage
     /// lifecycle events.
     /// </summary>
-    public class ReactContext : IReactContext
+    public class ReactContext : IDisposable
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
         private readonly List<ILifecycleEventListener> _lifecycleEventListeners =

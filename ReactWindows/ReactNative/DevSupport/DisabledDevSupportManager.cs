@@ -89,11 +89,11 @@ namespace ReactNative.DevSupport
             return Task.FromResult(false);
         }
 
-        public void OnNewReactContextCreated(IReactContext context)
+        public void OnNewReactContextCreated(ReactContext context)
         {
         }
 
-        public void OnReactContextDestroyed(IReactContext context)
+        public void OnReactContextDestroyed(ReactContext context)
         {
         }
 

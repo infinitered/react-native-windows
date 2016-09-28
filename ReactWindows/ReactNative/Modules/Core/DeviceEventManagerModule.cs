@@ -18,7 +18,7 @@ namespace ReactNative.Modules.Core
         /// The action to take when back is pressed.
         /// </param>
         public DeviceEventManagerModule(
-            IReactContext reactContext,
+            ReactContext reactContext,
             Action onBackPressed)
           : base(reactContext)
         {

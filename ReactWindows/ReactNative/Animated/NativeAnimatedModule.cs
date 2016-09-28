@@ -73,7 +73,7 @@ namespace ReactNative.Animated
         /// Instantiates the <see cref="NativeAnimatedModule"/>. 
         /// </summary>
         /// <param name="reactContext">The React context.</param>
-        public NativeAnimatedModule(IReactContext reactContext)
+        public NativeAnimatedModule(ReactContext reactContext)
             : base(reactContext)
         {
         }
