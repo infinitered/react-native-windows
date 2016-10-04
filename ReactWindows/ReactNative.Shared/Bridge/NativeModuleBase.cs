@@ -182,10 +182,12 @@ namespace ReactNative.Bridge
 
             public void Invoke(IReactInstance reactInstance, JArray jsArguments)
             {
+#if WINDOWS_UWP
                 using (Tracer.Trace(Tracer.TRACE_TAG_REACT_BRIDGE, "callNativeModuleMethod").Start())
                 {
                     _invokeDelegate.Value(_instance, reactInstance, jsArguments);
                 }
+#endif
             }
         }
     }
