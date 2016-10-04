@@ -27,7 +27,7 @@ namespace ReactNative.Tracing
         /// <summary>
         /// The logging channel instance.
         /// </summary>
-        public static ReactNativeLoggingChannel Instance { get; } = new ReactNativeLoggingChannel("ReactWindows", null);
+        private static LoggingChannel Instance { get; } = new LoggingChannel("ReactWindows", null);
 
         /// <summary>
         /// Create a logging activity builder.
@@ -39,7 +39,7 @@ namespace ReactNative.Tracing
         {
             if (Instance.Enabled)
             {
-                return new LoggingActivityBuilder(Instance._instance, name, LoggingLevel.Information, new LoggingOptions
+                return new LoggingActivityBuilder(Instance, name, LoggingLevel.Information, new LoggingOptions
                 {
                     Tags = tag,
                 });
@@ -59,7 +59,7 @@ namespace ReactNative.Tracing
         {
             if (Instance.Enabled)
             {
-                Instance.LogEvent(eventName, null, ReactNativeLoggingLevel.Information, new LoggingOptions
+                Instance.LogEvent(eventName, null, LoggingLevel.Information, new LoggingOptions
                 {
                     Tags = tag
                 });
@@ -76,7 +76,7 @@ namespace ReactNative.Tracing
         {
             if (Instance.Enabled)
             {
-                Instance.LogEvent(eventName, null, ReactNativeLoggingLevel.Error);
+                Instance.LogEvent(eventName, null, LoggingLevel.Error);
             }
         }
     }
