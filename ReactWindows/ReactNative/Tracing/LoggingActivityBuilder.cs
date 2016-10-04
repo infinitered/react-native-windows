@@ -2,7 +2,13 @@
 
 namespace ReactNative.Tracing
 {
-    class LoggingActivityBuilder
+    internal interface ILoggingActivityBuilder
+    {
+        LoggingFields Fields { get; }
+        LoggingActivity Create();
+    }
+
+    class LoggingActivityBuilder : ILoggingActivityBuilder
     {
         private readonly ILoggingTarget _target;
         private readonly string _name;
