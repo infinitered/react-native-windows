@@ -1,4 +1,5 @@
 ﻿using System;
+#if WINDOWS_UWP
 using Windows.Foundation.Diagnostics;
 
 namespace ReactNative.Tracing
@@ -26,7 +27,7 @@ namespace ReactNative.Tracing
         /// <summary>
         /// The logging channel instance.
         /// </summary>
-        public static LoggingChannel Instance { get; } = new LoggingChannel("ReactWindows", null);
+        public static ReactNativeLoggingChannel Instance { get; } = new ReactNativeLoggingChannel("ReactWindows", null);
 
         /// <summary>
         /// Create a logging activity builder.
@@ -38,7 +39,7 @@ namespace ReactNative.Tracing
         {
             if (Instance.Enabled)
             {
-                return new LoggingActivityBuilder(Instance, name, LoggingLevel.Information, new LoggingOptions
+                return new LoggingActivityBuilder(Instance._instance, name, LoggingLevel.Information, new LoggingOptions
                 {
                     Tags = tag,
                 });
@@ -58,7 +59,7 @@ namespace ReactNative.Tracing
         {
             if (Instance.Enabled)
             {
-                Instance.LogEvent(eventName, null, LoggingLevel.Information, new LoggingOptions
+                Instance.LogEvent(eventName, null, ReactNativeLoggingLevel.Information, new LoggingOptions
                 {
                     Tags = tag
                 });
@@ -75,8 +76,34 @@ namespace ReactNative.Tracing
         {
             if (Instance.Enabled)
             {
-                Instance.LogEvent(eventName, null, LoggingLevel.Error);
+                Instance.LogEvent(eventName, null, ReactNativeLoggingLevel.Error);
             }
         }
     }
 }
+#else
+namespace ReactNative.Tracing 
+{
+    static class Tracer
+    {
+        public const int TRACE_TAG_REACT_BRIDGE = 0;
+        public const int TRACE_TAG_REACT_APPS = 1;
+        public const int TRACE_TAG_REACT_VIEW = 2;
+
+        public static Object Instance { get; } = null;
+        
+        public static Object Trace(int tag, string name)
+        {
+            return null;
+        }
+
+        public static void Write(int tag, string eventName)
+        {
+        }
+
+        public static void Error(int tag, string eventName, Exception ex)
+        {
+        }
+    }
+}
+#endif

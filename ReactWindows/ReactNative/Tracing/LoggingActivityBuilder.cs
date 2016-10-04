@@ -1,5 +1,4 @@
 ﻿using Windows.Foundation.Diagnostics;
-
 namespace ReactNative.Tracing
 {
     class LoggingActivityBuilder
