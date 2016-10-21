@@ -141,6 +141,9 @@
     </Compile>
     <Compile Include="Tracing\NullLoggingActivityBuilder.cs" />
     <Compile Include="Tracing\Tracer.cs" />
+    <Compile Include="Views\Text\ReactTextCompoundView.cs" />
+    <Compile Include="Views\Text\ReactTextShadowNode.cs" />
+    <Compile Include="Views\Text\ReactTextViewManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

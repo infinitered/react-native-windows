@@ -1,9 +1,16 @@
 ﻿using ReactNative.UIManager;
 using ReactNative.UIManager.Annotations;
 using System;
+#if WINDOWS_UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
+#else
+using System.Collections;
+using System.Windows;
+using System.Windows.Documents;
+using System.Windows.Media;
+#endif
 using static System.FormattableString;
 
 namespace ReactNative.Views.Text
@@ -69,7 +76,11 @@ namespace ReactNative.Views.Text
                 };
             }
 
+#if WINDOWS_UWP
             span.Inlines.Insert(index, inlineChild);
+#else
+            ((IList) span.Inlines).Insert(index, inlineChild);
+#endif
         }
 
         /// <summary>
@@ -96,7 +107,11 @@ namespace ReactNative.Views.Text
         public DependencyObject GetChildAt(DependencyObject parent, int index)
         {
             var span = (Span)parent;
+#if WINDOWS_UWP
             var child = span.Inlines[index];
+#else
+            var child = ((IList) span.Inlines)[index];
+#endif
             var childInlineContainer = child as InlineUIContainer;
             if (childInlineContainer != null)
             {
@@ -104,7 +119,11 @@ namespace ReactNative.Views.Text
             }
             else
             {
+#if WINDOWS_UWP
                 return child;
+#else
+                return (DependencyObject)child;
+#endif
             }
         }
 
@@ -151,7 +170,11 @@ namespace ReactNative.Views.Text
         public void RemoveChildAt(DependencyObject parent, int index)
         {
             var span = (Span)parent;
+#if WINDOWS_UWP
             span.Inlines.RemoveAt(index);
+#else
+            ((IList) span.Inlines).RemoveAt(index);
+#endif
         }
 
         /// <summary>
