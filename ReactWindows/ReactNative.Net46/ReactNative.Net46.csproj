@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="Tracing\NullLoggingActivityBuilder.cs" />
     <Compile Include="Tracing\Tracer.cs" />
+    <Compile Include="UIManager\BaseViewManager.cs" />
     <Compile Include="Views\Text\ReactTextCompoundView.cs" />
     <Compile Include="Views\Text\ReactTextShadowNode.cs" />
     <Compile Include="Views\Text\ReactTextViewManager.cs" />
@@ -177,7 +178,7 @@
       <ChakraCoreDll Include="$(SolutionDir)..\ChakraCore\Build\VcBuild\bin\$(Platform)_$(Configuration)\ChakraCore.*" />
     </ItemGroup>
     <Copy SourceFiles="@(ChakraCoreDll)"
-          DestinationFolder="$(OutputPath)" 
+          DestinationFolder="$(OutputPath)"
           ContinueOnError="false" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

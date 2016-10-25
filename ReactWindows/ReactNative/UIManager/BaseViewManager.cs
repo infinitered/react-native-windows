@@ -1,20 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
 using ReactNative.UIManager.Annotations;
 using System;
-#if WINDOWS_UWP
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Media3D;
-#else
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Media3D;
-using System.Windows.Automation;
-#endif
 
 namespace ReactNative.UIManager
 {
@@ -67,7 +59,6 @@ namespace ReactNative.UIManager
         [ReactProp("overflow")]
         public void SetOverflow(TFrameworkElement view, string overflow)
         {
-#if WINDOWS_UWP
             if (overflow == "hidden")
             {
                 WinRTXamlToolkit.Controls.Extensions.FrameworkElementExtensions.SetClipToBounds(view, true);
@@ -76,7 +67,6 @@ namespace ReactNative.UIManager
             {
                 WinRTXamlToolkit.Controls.Extensions.FrameworkElementExtensions.SetClipToBounds(view, false);
             }
-#endif
         }
 
         /// <summary>
@@ -109,7 +99,6 @@ namespace ReactNative.UIManager
         [ReactProp("accessibilityLiveRegion")]
         public void SetAccessibilityLiveRegion(TFrameworkElement view, string liveRegion)
         {
-#if WINDOWS_UWP
             var liveSetting = AutomationLiveSetting.Off;
             switch (liveRegion)
             {
@@ -122,7 +111,6 @@ namespace ReactNative.UIManager
             }
 
             AutomationProperties.SetLiveSetting(view, liveSetting);
-#endif
         }
 
         /// <summary>
@@ -138,7 +126,6 @@ namespace ReactNative.UIManager
 
         private static void SetProjectionMatrix(TFrameworkElement view, JArray transforms)
         {
-#if WINDOWS_UWP
             var projection = EnsureProjection(view);
             var transformMatrix = TransformHelper.ProcessTransform(transforms);
 
@@ -146,23 +133,21 @@ namespace ReactNative.UIManager
             var translateBackMatrix = Matrix3D.Identity;
             if (!double.IsNaN(view.Width))
             {
-                translateMatrix.OffsetX = -view.Width/2;
-                translateBackMatrix.OffsetX = view.Width/2;
+                translateMatrix.OffsetX = -view.Width / 2;
+                translateBackMatrix.OffsetX = view.Width / 2;
             }
 
             if (!double.IsNaN(view.Height))
             {
-                translateMatrix.OffsetY = -view.Height/2;
-                translateBackMatrix.OffsetY = view.Height/2;
+                translateMatrix.OffsetY = -view.Height / 2;
+                translateBackMatrix.OffsetY = view.Height / 2;
             }
 
-            projection.ProjectionMatrix = translateMatrix*transformMatrix*translateBackMatrix;
-#endif
+            projection.ProjectionMatrix = translateMatrix * transformMatrix * translateBackMatrix;
         }
 
         private static void ResetProjectionMatrix(TFrameworkElement view)
         {
-#if WINDOWS_UWP
             var projection = view.Projection;
             var matrixProjection = projection as Matrix3DProjection;
             if (projection != null && matrixProjection == null)
@@ -171,10 +156,8 @@ namespace ReactNative.UIManager
             }
 
             view.Projection = null;
-#endif
         }
 
-#if WINDOWS_UWP
         private static Matrix3DProjection EnsureProjection(FrameworkElement view)
         {
             var projection = view.Projection;
@@ -192,6 +175,5 @@ namespace ReactNative.UIManager
 
             return matrixProjection;
         }
-#endif
     }
 }

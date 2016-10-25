@@ -5,14 +5,11 @@ using ReactNative.Tracing;
 using ReactNative.UIManager.Events;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 
 #if WINDOWS_UWP
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
-#else
-
 #endif
 
 namespace ReactNative.UIManager
@@ -31,6 +28,11 @@ namespace ReactNative.UIManager
         private readonly UIImplementation _uiImplementation;
         private readonly IReadOnlyDictionary<string, object> _moduleConstants;
         private readonly EventDispatcher _eventDispatcher;
+#if WINDOWS_UWP
+        private static ApplicationView _window;
+#else
+        private static FrameworkElement _window;
+#endif
 
         private int _batchId;
         private int _nextRootTag = 1;
@@ -41,10 +43,16 @@ namespace ReactNative.UIManager
         /// <param name="reactContext">The React context.</param>
         /// <param name="viewManagers">The view managers.</param>
         /// <param name="uiImplementation">The UI implementation.</param>
+        /// <param name="window">The ApplicationView/Framework Element.</param>
         public UIManagerModule(
             ReactContext reactContext,
             IReadOnlyList<IViewManager> viewManagers,
-            UIImplementation uiImplementation)
+            UIImplementation uiImplementation,
+#if WINDOWS_UWP
+            ApplicationView window)
+#else
+            FrameworkElement window)
+#endif
             : base(reactContext)
         {
             if (viewManagers == null)
@@ -52,6 +60,7 @@ namespace ReactNative.UIManager
             if (uiImplementation == null)
                 throw new ArgumentNullException(nameof(uiImplementation));
 
+            _window = window;
             _eventDispatcher = new EventDispatcher(reactContext);
             _uiImplementation = uiImplementation;
             _moduleConstants = CreateConstants(viewManagers);
@@ -448,7 +457,9 @@ namespace ReactNative.UIManager
         {
             _uiImplementation.OnSuspend();
 #if WINDOWS_UWP
-            ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnBoundsChanged;
+            _window.VisibleBoundsChanged -= OnBoundsChanged;
+#else
+            _window.SizeChanged -= OnBoundsChanged;
 #endif
         }
 
@@ -459,7 +470,9 @@ namespace ReactNative.UIManager
         {
             _uiImplementation.OnResume();
 #if WINDOWS_UWP
-            ApplicationView.GetForCurrentView().VisibleBoundsChanged += OnBoundsChanged;
+            _window.VisibleBoundsChanged += OnBoundsChanged;
+#else
+            _window.SizeChanged += OnBoundsChanged;
 #endif
         }
 
@@ -470,7 +483,9 @@ namespace ReactNative.UIManager
         public void OnDestroy()
         {
 #if WINDOWS_UWP
-            ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnBoundsChanged;
+            _window.VisibleBoundsChanged -= OnBoundsChanged;
+#else
+            _window.SizeChanged -= OnBoundsChanged;
 #endif
             _uiImplementation.OnShutdown();
             _eventDispatcher.OnDestroy();
@@ -511,25 +526,27 @@ namespace ReactNative.UIManager
 
         #endregion
 
-#region Dimensions
+        #region Dimensions
 #if WINDOWS_UWP
         private void OnBoundsChanged(ApplicationView sender, object args)
+#else
+        private void OnBoundsChanged(object sender, SizeChangedEventArgs args)
+#endif
         {
             Context.GetJavaScriptModule<RCTDeviceEventEmitter>()
                 .emit("didUpdateDimensions", GetDimensions());
         }
-#endif
 
         private static IDictionary<string, object> GetDimensions()
         {
 #if WINDOWS_UWP
-            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
+            var bounds = _window.VisibleBounds;
             var scale = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 #else
-            var bounds = Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w.IsActive);
-            var scale = new Double();
+            var bounds = new Rect() {Height = _window.Height, Width = _window.Width};
+            double scale = 1.0;
 #endif
-
+            
             return new Dictionary<string, object>
             {
                 {
