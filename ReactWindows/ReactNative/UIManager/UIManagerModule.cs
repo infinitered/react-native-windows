@@ -5,12 +5,8 @@ using ReactNative.Tracing;
 using ReactNative.UIManager.Events;
 using System;
 using System.Collections.Generic;
-using System.Windows;
-
-#if WINDOWS_UWP
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
-#endif
 
 namespace ReactNative.UIManager
 {
@@ -28,11 +24,6 @@ namespace ReactNative.UIManager
         private readonly UIImplementation _uiImplementation;
         private readonly IReadOnlyDictionary<string, object> _moduleConstants;
         private readonly EventDispatcher _eventDispatcher;
-#if WINDOWS_UWP
-        private static ApplicationView _window;
-#else
-        private static FrameworkElement _window;
-#endif
 
         private int _batchId;
         private int _nextRootTag = 1;
@@ -47,12 +38,7 @@ namespace ReactNative.UIManager
         public UIManagerModule(
             ReactContext reactContext,
             IReadOnlyList<IViewManager> viewManagers,
-            UIImplementation uiImplementation,
-#if WINDOWS_UWP
-            ApplicationView window)
-#else
-            FrameworkElement window)
-#endif
+            UIImplementation uiImplementation)
             : base(reactContext)
         {
             if (viewManagers == null)
@@ -60,7 +46,6 @@ namespace ReactNative.UIManager
             if (uiImplementation == null)
                 throw new ArgumentNullException(nameof(uiImplementation));
 
-            _window = window;
             _eventDispatcher = new EventDispatcher(reactContext);
             _uiImplementation = uiImplementation;
             _moduleConstants = CreateConstants(viewManagers);
@@ -456,11 +441,7 @@ namespace ReactNative.UIManager
         public void OnSuspend()
         {
             _uiImplementation.OnSuspend();
-#if WINDOWS_UWP
-            _window.VisibleBoundsChanged -= OnBoundsChanged;
-#else
-            _window.SizeChanged -= OnBoundsChanged;
-#endif
+            ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnBoundsChanged;
         }
 
         /// <summary>
@@ -469,11 +450,7 @@ namespace ReactNative.UIManager
         public void OnResume()
         {
             _uiImplementation.OnResume();
-#if WINDOWS_UWP
-            _window.VisibleBoundsChanged += OnBoundsChanged;
-#else
-            _window.SizeChanged += OnBoundsChanged;
-#endif
+            ApplicationView.GetForCurrentView().VisibleBoundsChanged += OnBoundsChanged;
         }
 
 
@@ -482,11 +459,7 @@ namespace ReactNative.UIManager
         /// </summary>
         public void OnDestroy()
         {
-#if WINDOWS_UWP
-            _window.VisibleBoundsChanged -= OnBoundsChanged;
-#else
-            _window.SizeChanged -= OnBoundsChanged;
-#endif
+            ApplicationView.GetForCurrentView().VisibleBoundsChanged -= OnBoundsChanged;
             _uiImplementation.OnShutdown();
             _eventDispatcher.OnDestroy();
         }
@@ -523,15 +496,10 @@ namespace ReactNative.UIManager
         {
             _eventDispatcher.OnReactInstanceDispose();
         }
+#endregion
 
-        #endregion
-
-        #region Dimensions
-#if WINDOWS_UWP
+#region Dimensions
         private void OnBoundsChanged(ApplicationView sender, object args)
-#else
-        private void OnBoundsChanged(object sender, SizeChangedEventArgs args)
-#endif
         {
             Context.GetJavaScriptModule<RCTDeviceEventEmitter>()
                 .emit("didUpdateDimensions", GetDimensions());
@@ -539,13 +507,8 @@ namespace ReactNative.UIManager
 
         private static IDictionary<string, object> GetDimensions()
         {
-#if WINDOWS_UWP
-            var bounds = _window.VisibleBounds;
+            var bounds = ApplicationView.GetForCurrentView().VisibleBounds;
             var scale = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-#else
-            var bounds = new Rect() {Height = _window.Height, Width = _window.Width};
-            double scale = 1.0;
-#endif
             
             return new Dictionary<string, object>
             {

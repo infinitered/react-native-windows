@@ -13,7 +13,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 #else
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 #endif
 using static System.FormattableString;
@@ -23,7 +22,7 @@ namespace ReactNative.UIManager
     /// <summary>
     /// Delegate of <see cref="UIManagerModule"/> that owns the native view
     /// hierarchy and mapping between native view names used in JavaScript and
-    /// corresponding instances of <see cref="IViewManager"/>. The 
+    /// corresponding instances of <see cref="IViewManager"/>. The
     /// <see cref="UIManagerModule"/> communicates with this class by it's
     /// public interface methods:
     /// - <see cref="UpdateProperties(int, ReactStylesDiffMap)"/>
@@ -35,10 +34,10 @@ namespace ReactNative.UIManager
     /// <remarks>
     /// All native view management methods listed above must be called from the
     /// dispatcher thread.
-    /// 
+    ///
     /// The <see cref="ReactContext"/> instance that is passed to views that
     /// this manager creates differs from the one that we pass to the
-    /// constructor. Instead we wrap the provided instance of 
+    /// constructor. Instead we wrap the provided instance of
     /// <see cref="ReactContext"/> in an instance of <see cref="ThemedReactContext"/>
     /// that additionally provides a correct theme based on the root view for
     /// a view tree that we attach newly created views to. Therefore this view
@@ -46,8 +45,8 @@ namespace ReactNative.UIManager
     /// wraps the instance of <see cref="ReactContext"/> for each root view
     /// added to the manager (see
     /// <see cref="AddRootView(int, SizeMonitoringCanvas, ThemedReactContext)"/>).
-    /// 
-    /// TODO: 
+    ///
+    /// TODO:
     /// 1) AnimationRegistry
     /// 2) ShowPopupMenu
     /// </remarks>
@@ -84,7 +83,7 @@ namespace ReactNative.UIManager
             private get;
             set;
         }
-        
+
         /// <summary>
         /// Updates the properties of the view with the given tag.
         /// </summary>
@@ -164,7 +163,7 @@ namespace ReactNative.UIManager
                 _tagsToViews.Add(tag, view);
                 _tagsToViewManagers.Add(tag, viewManager);
 
-                // Uses an extension method and `Tag` property on 
+                // Uses an extension method and `Tag` property on
                 // DependencyObject to store the tag of the view.
                 view.SetTag(tag);
                 view.SetReactContext(themedContext);
@@ -458,15 +457,15 @@ namespace ReactNative.UIManager
             var target = VisualTreeHelper.FindElementsInHostCoordinates(new Point(touchX, touchY), uiElement)
 #else
             var sources = new List<DependencyObject>();
+            // ToDo: Consider a pooled structure to improve performance in touch heavy applications
             VisualTreeHelper.HitTest(
                 uiElement,
                 null,
-                new HitTestResultCallback(
-                    (HitTestResult hit) =>
-                    {
-                        sources.Add(hit.VisualHit);
-                        return HitTestResultBehavior.Continue;
-                    }),
+                hit =>
+                {
+                    sources.Add(hit.VisualHit);
+                    return HitTestResultBehavior.Continue;
+                },
                 new PointHitTestParameters(new Point(touchX, touchY)));
             var target = sources
 #endif
@@ -506,7 +505,7 @@ namespace ReactNative.UIManager
                     Invariant($"Could not find view with tag '{reactTag}'."));
             }
 
-            // TODO: (#306) Finish JS responder implementation. 
+            // TODO: (#306) Finish JS responder implementation.
         }
 
         /// <summary>
