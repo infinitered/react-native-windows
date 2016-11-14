@@ -2,6 +2,7 @@
 using ReactNative.Modules.Core;
 using ReactNative.Shell;
 using System.Collections.Generic;
+using Com.Reactlibrary.RNWinGif;
 
 namespace Playground.Net46
 {
@@ -24,6 +25,7 @@ namespace Playground.Net46
         public override List<IReactPackage> Packages => new List<IReactPackage>
         {
             new MainReactPackage(),
+            new RNWinGifPackage(),
         };
 
         public override bool UseDeveloperSupport
