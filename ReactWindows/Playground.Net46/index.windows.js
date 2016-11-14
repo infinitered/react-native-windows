@@ -85,14 +85,14 @@ class Playground extends Component {
               iterationCount="infinite"
               style={Styles.attendeesButton}
             >
-              <Image source={{uri: "http://findicons.com/files/icons/703/artists_valley_sample/128/business_man_blue.png"}} style={Styles.user} />
+              <Image source={require('./Images/user-icon.png')} style={Styles.user} />
               <Text style={Styles.attendeesText}>6</Text>
             </Animatable.View>
             <TouchableHighlight onPress={() => null} underlayColor={Colors.highlight}>
-              <Image source={{uri: "http://findicons.com/files/icons/808/on_stage/128/chat_2.png"}} style={Styles.chat} />
+              <Image source={require('./Images/chatbubble-outline.png')} style={Styles.chat} />
             </TouchableHighlight>
             <TouchableHighlight onPress={() => null} underlayColor={Colors.highlight}>
-              <Image source={{uri: "http://findicons.com/files/icons/1676/primo/128/gear.png"}} style={Styles.settings} />
+              <Image source={require('./Images/settings-128.png')} style={Styles.settings} />
             </TouchableHighlight>
           </View>
         </View>
@@ -148,10 +148,10 @@ class Playground extends Component {
       <View style={Styles.mainContainer}>
         { this._renderTopStats() }
         <View style={Styles.horizontal}>
-          <WinGif source={{ uri: "http://3.bp.blogspot.com/-2dX2h8SXorU/TlUM4ot6JZI/AAAAAAAAHbw/Y4K-hnV6Dfw/s1600/oacg84.gif" }} style={Styles.videoBox} />
-          <WinGif source={{ uri: "https://larry5154.files.wordpress.com/2012/09/cat-walking.gif" }}  style={Styles.videoBox} />
-          <WinGif source={{ uri: "http://media3.giphy.com/media/7AbrISbC4ZOIU/giphy.gif" }}  style={Styles.videoBox} />
-          <WinGif source={{ uri: "http://stream1.gifsoup.com/view3/1228906/cat-massage-o.gif" }} style={Styles.videoBox}  />
+          <WinGif source={require('./Images/meow.gif')} style={Styles.videoBox} />
+          <WinGif source={require('./Images/beg.gif')}  style={Styles.videoBox} />
+          <WinGif source={require('./Images/kittyTyper.gif')}  style={Styles.videoBox} />
+          <WinGif source={require('./Images/stairs.gif')} style={Styles.videoBox}  />
           <WinGif source={{ uri: 'https://slack-imgs.com/?c=1&url=http%3A%2F%2Fstream1.gifsoup.com%2Fview2%2F1567149%2Fdun-dun-dun-o.gif'}} style={Styles.videoBox}  />
         </View>
         { this._renderDragMenu() }
@@ -161,25 +161,15 @@ class Playground extends Component {
 }
 
 Colors = {
-  background: '#1F0808',
+  background: '#afc4df',
   clear: 'rgba(0,0,0,0)',
-  facebook: '#3b5998',
+  agua: '#0000ff',
   transparent: 'rgba(0,0,0,0)',
-  silver: '#F7F7F7',
-  steel: '#CCCCCC',
-  error: 'rgba(200, 0, 0, 0.8)',
-  ricePaper: 'rgba(255,255,255, 0.75)',
-  frost: '#D8D8D8',
-  cloud: 'rgba(200,200,200, 0.35)',
-  windowTint: 'rgba(0, 0, 0, 0.4)',
-  panther: '#161616',
-  charcoal: '#595959',
-  coal: '#2d2d2d',
-  bloodOrange: '#fb5f26',
+  silver: '#f0f4f9',
   snow: 'white',
-  ember: 'rgba(164, 0, 48, 0.5)',
-  fire: '#e73536',
-  drawer: 'rgba(30, 30, 29, 0.95)'
+  coal: '#1f1f1f',
+  charcoal: '#030303',
+  highlight: '#FF0066'
 }
 
 const Metrics = {
@@ -204,7 +194,8 @@ const Metrics = {
   images: {
     small: 20,
     medium: 40,
-    large: 60,
+    normal: 60,
+    large: 160,
     logo: 300
   }
 }
@@ -304,7 +295,8 @@ const Styles = StyleSheet.create({
   user: {
     width: Metrics.images.medium,
     height: Metrics.images.medium,
-    marginVertical: Metrics.baseMargin
+    marginVertical: Metrics.baseMargin,
+    resizeMode: "contain"
   },
   chat: {
     width: Metrics.images.normal,
