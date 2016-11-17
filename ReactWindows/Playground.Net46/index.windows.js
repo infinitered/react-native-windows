@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import WinGif from 'react-native-win-gif';
 import * as Animatable from 'react-native-animatable';
+import Video from 'react-native-video';
 
 class Playground extends Component {
   constructor(props) {
@@ -153,6 +154,16 @@ class Playground extends Component {
           <WinGif source={require('./Images/kittyTyper.gif')}  style={Styles.videoBox} />
           <WinGif source={require('./Images/stairs.gif')} style={Styles.videoBox}  />
           <WinGif source={{ uri: 'https://slack-imgs.com/?c=1&url=http%3A%2F%2Fstream1.gifsoup.com%2Fview2%2F1567149%2Fdun-dun-dun-o.gif'}} style={Styles.videoBox}  />
+        </View>
+        <View style={{width: 600, height: 400}}>
+          <Video
+            source={{uri: 'http://www.w3schools.com/HTML/mov_bbb.mp4'}}
+            paused={false}
+            repeat={true}
+            volume={1.0}
+            rate={1.0}
+            style={{flex: 1, backgroundColor: "#00ff00", width: 600, height: 400}}
+            />
         </View>
         { this._renderDragMenu() }
       </View>

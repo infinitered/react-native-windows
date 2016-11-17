@@ -3,6 +3,7 @@ using ReactNative.Modules.Core;
 using ReactNative.Shell;
 using System.Collections.Generic;
 using Com.Reactlibrary.RNWinGif;
+using ReactNativeVideo;
 
 namespace Playground.Net46
 {
@@ -26,6 +27,7 @@ namespace Playground.Net46
         {
             new MainReactPackage(),
             new RNWinGifPackage(),
+            new ReactVideoPackage(),
         };
 
         public override bool UseDeveloperSupport

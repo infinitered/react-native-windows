@@ -106,6 +106,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\react-native-video\windows\ReactNativeVideo.Net46\ReactNativeVideo.Net46.csproj">
+      <Project>{2d8406ab-0674-42d3-8fe3-41d251403df8}</Project>
+      <Name>ReactNativeVideo.Net46</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\wingif\windows\RNWinGif.Net46\RNWinGif.Net46.csproj">
       <Project>{71c47828-f347-40bf-aafc-c801ccdb176f}</Project>
       <Name>RNWinGif.Net46</Name>

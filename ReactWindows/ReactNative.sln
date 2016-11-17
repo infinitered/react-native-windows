@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground.Net46", "Playgro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RNWinGif.Net46", "..\..\wingif\windows\RNWinGif.Net46\RNWinGif.Net46.csproj", "{71C47828-F347-40BF-AAFC-C801CCDB176F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactNativeVideo.Net46", "..\..\react-native-video\windows\ReactNativeVideo.Net46\ReactNativeVideo.Net46.csproj", "{2D8406AB-0674-42D3-8FE3-41D251403DF8}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		ReactNative.Shared\ReactNative.Shared.projitems*{22cbff9c-fe36-43e8-a246-266c7635e662}*SharedItemsImports = 4
@@ -342,6 +344,38 @@ Global
 		{71C47828-F347-40BF-AAFC-C801CCDB176F}.ReleaseBundle|x64.Build.0 = Release|Any CPU
 		{71C47828-F347-40BF-AAFC-C801CCDB176F}.ReleaseBundle|x86.ActiveCfg = Release|Any CPU
 		{71C47828-F347-40BF-AAFC-C801CCDB176F}.ReleaseBundle|x86.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|ARM.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|x64.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Debug|x86.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|Any CPU.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|ARM.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|ARM.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|x64.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|x64.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|x86.ActiveCfg = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.DebugBundle|x86.Build.0 = Debug|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|ARM.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|ARM.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|x64.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|x64.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|x86.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.Release|x86.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|Any CPU.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|ARM.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|ARM.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|x64.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|x64.Build.0 = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|x86.ActiveCfg = Release|Any CPU
+		{2D8406AB-0674-42D3-8FE3-41D251403DF8}.ReleaseBundle|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
