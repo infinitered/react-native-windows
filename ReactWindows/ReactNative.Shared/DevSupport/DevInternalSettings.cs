@@ -30,6 +30,10 @@ namespace ReactNative.DevSupport
 
         private readonly IDevSupportManager _debugManager;
 
+#if !WINDOWS_UWP
+        private readonly IDictionary<string, object> _localSettings = new Dictionary<string, object>();
+#endif
+
         public DevInternalSettings(IDevSupportManager debugManager)
         {
             _debugManager = debugManager;
@@ -125,6 +129,8 @@ namespace ReactNative.DevSupport
             }
         }
 
+
+        //TODO: Git Issue #878
         private T GetSetting<T>(string key, T defaultValue)
         {
 #if WINDOWS_UWP
@@ -137,20 +143,25 @@ namespace ReactNative.DevSupport
                     return (T)data;
                 }
             }
-#else
-            if (typeof(T) == typeof(bool))
-            {
-                var result = default(bool);
-                var parsed = bool.TryParse(ConfigurationManager.AppSettings[key], out result);
-                return (T)(object)(parsed && result);
-            }
-            else
-            {
-                throw new NotSupportedException(Invariant($"Configuration values of type '{typeof(T)}' are not supported."));
-            }
-#endif
 
             return defaultValue;
+#else
+            if (_localSettings.ContainsKey(key))
+            {
+                var data = _localSettings[key];
+
+                if (data is T)
+                {
+                    return (T)data;
+                }
+                else
+                {
+                    throw new NotSupportedException(Invariant($"Configuration values of type '{typeof(T)}' are not supported."));
+                }
+            }
+
+            return defaultValue;
+#endif
         }
 
         private void SetSetting<T>(string key, T value)
@@ -159,15 +170,7 @@ namespace ReactNative.DevSupport
             var values = ApplicationData.Current.LocalSettings.Values;
             values[key] = value;
 #else
-            var values = ConfigurationManager.AppSettings;
-            if (values[key] == null)
-            {
-                values.Add(key, value.ToString());
-            }
-            else
-            {
-                values[key] = value.ToString();
-            }
+            _localSettings[key] = value;
 #endif
 
             if (s_triggerReload.Contains(key))

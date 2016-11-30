@@ -29,13 +29,15 @@ namespace ReactNative.UIManager.LayoutAnimation
         {
             _storyboard.Begin();
 
+#if WINDOWS_UWP
             return Observable.FromEventPattern<object>(
 #if WINDOWS_UWP
                 h => _storyboard.Completed += h,
                 h => _storyboard.Completed -= h)
 #else
-                h => _storyboard.Completed += new EventHandler(h),
-                h => _storyboard.Completed -= new EventHandler(h))
+            return Observable.FromEventPattern(
+                h => _storyboard.Completed += h,
+                h => _storyboard.Completed -= h)
 #endif
                 .Select(v => default(Unit))
                 .Finally(() =>
