@@ -10,8 +10,14 @@ import {
   Text,
   View,
 } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 class Playground extends Component {
+  constructor(props) {
+    super(props)
+    DeviceInfo.getConnectedDevices((devices) => {console.info(devices)});
+  }
+
   render() {
     return (
       <View style={styles.container}>

@@ -2,6 +2,7 @@
 using ReactNative.Modules.Core;
 using ReactNative.Shell;
 using System.Collections.Generic;
+using RNDeviceInfo;
 
 namespace Playground.Net46
 {
@@ -24,6 +25,7 @@ namespace Playground.Net46
         public override List<IReactPackage> Packages => new List<IReactPackage>
         {
             new MainReactPackage(),
+            new RNDeviceInfoPackage(),
         };
 
         public override bool UseDeveloperSupport

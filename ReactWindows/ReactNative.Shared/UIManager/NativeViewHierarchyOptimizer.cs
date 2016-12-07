@@ -20,7 +20,7 @@ namespace ReactNative.UIManager
     /// 
     /// Currently, this class is only used to remove layout-only views, that
     /// is to say views that only affect the positions of their children but do
-    /// not draw anything themselves. These views are faily common because
+    /// not draw anything themselves. These views are fairly common because
     /// 1) containers are used to do layouting via flexbox and 2) the return of
     /// each render call in JavaScript must be exactly one view, which means
     /// views are often wrapped in an unnecessary layer of hierarchy.
