@@ -14,9 +14,9 @@ clone_script:
 
     cd $Env:APPVEYOR_BUILD_FOLDER
 
-    git fetch -f upstream +refs/pull/899/merge:pr-899
+    git fetch -f upstream +refs/pull/899/merge:FETCH_HEAD
 
-    git checkout pr-899
+    git checkout -f FETCH_HEAD
 
     git submodule update -q --init --recursive
 
