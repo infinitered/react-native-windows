@@ -14,28 +14,28 @@ clone_script:
 
     cd $Env:APPVEYOR_BUILD_FOLDER
 
-    git fetch -f upstream +refs/pull/899/merge
+    git fetch -qf upstream +refs/pull/899/merge
 
-    git checkout -f FETCH_HEAD
+    git checkout -qf FETCH_HEAD
 
     git submodule update -q --init --recursive
 
-# before_build:
-# - ps: >-
-#     Get-ChildItem .\ChakraCore\Build\VcBuild * -recurse | ForEach-Object{$_.LastWriteTime = get-date}
-#
-#     nuget restore ReactWindows\ReactNative.sln
-#
-# build_script:
-# - cmd: >-
-#     set DEVENV="%VS140COMNTOOLS%\..\IDE\devenv"
-#
-#     %DEVENV% /build "Debug|x86" ReactWindows\ReactNative.sln
-#
-#     %DEVENV% /build "ReleaseBundle|x64" ReactWindows\ReactNative.sln
-#
-#     %DEVENV% /build "Debug|ARM" ReactWindows\ReactNative.sln
-#
-# test:
-#   assemblies:
-#   - ReactWindows\ReactNative.Net46.Tests\bin\x64\**\*.Tests.dll
+before_build:
+- ps: >-
+    Get-ChildItem .\ChakraCore\Build\VcBuild * -recurse | ForEach-Object{$_.LastWriteTime = get-date}
+
+    nuget restore ReactWindows\ReactNative.sln
+
+build_script:
+- cmd: >-
+    set DEVENV="%VS140COMNTOOLS%\..\IDE\devenv"
+
+    %DEVENV% /build "Debug|x86" ReactWindows\ReactNative.sln
+
+    %DEVENV% /build "ReleaseBundle|x64" ReactWindows\ReactNative.sln
+
+    %DEVENV% /build "Debug|ARM" ReactWindows\ReactNative.sln
+
+test:
+  assemblies:
+  - ReactWindows\ReactNative.Net46.Tests\bin\x64\**\*.Tests.dll
