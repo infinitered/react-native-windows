@@ -14,8 +14,9 @@ clone_script:
 
     cd $Env:APPVEYOR_BUILD_FOLDER
 
-    if ($Env:APPVEYOR_PULL_REQUEST_NUMBER) { $("git fetch -q origin +refs/pull/" + $Env:APPVEYOR_PULL_REQUEST_NUMBER + "/merge:"); git checkout -qf FETCH_HEAD; }
-    else { $("git fetch upstream +refs/pull/899/merge:"); git checkout FETCH_HEAD; }
+    git fetch -f upstream +refs/pull/899/merge
+
+    git checkout -f FETCH_HEAD
 
     git submodule update -q --init --recursive
 
