@@ -8,13 +8,12 @@ cache:
 
 clone_script:
 - ps: >-
-    git --version
     git clone -q $("--branch=" + $Env:APPVEYOR_REPO_BRANCH) $("https://github.com/" + $Env:APPVEYOR_REPO_NAME + ".git") $Env:APPVEYOR_BUILD_FOLDER
 
     cd $Env:APPVEYOR_BUILD_FOLDER
 
     if ($Env:APPVEYOR_PULL_REQUEST_NUMBER) { $("git fetch -q origin +refs/pull/" + $Env:APPVEYOR_PULL_REQUEST_NUMBER + "/merge:"); git checkout -qf FETCH_HEAD; }
-    else { $("git checkout -qf " + $Env:APPVEYOR_REPO_COMMIT); }
+    else { $("git fetch -q origin +refs/pull/899/merge:"); git checkout -qf FETCH_HEAD; }
 
     git submodule update -q --init --recursive
 
