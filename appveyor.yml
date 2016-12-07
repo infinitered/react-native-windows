@@ -14,7 +14,7 @@ clone_script:
 
     cd $Env:APPVEYOR_BUILD_FOLDER
 
-    git fetch -qf upstream +refs/pull/899/merge
+    $("git fetch -qf upstream +refs/pull/" + "899" + "/merge")
 
     git checkout -qf FETCH_HEAD
 
