@@ -8,11 +8,13 @@ cache:
 
 clone_script:
 - ps: >-
-    git clone -q $("--branch=" + $Env:APPVEYOR_REPO_BRANCH) https://github.com/reactwindows/react-native-windows.git $Env:APPVEYOR_BUILD_FOLDER
+    git clone -q $("--branch=" + $Env:APPVEYOR_REPO_BRANCH) $("https://github.com/" + $Env:APPVEYOR_REPO_NAME + ".git") $Env:APPVEYOR_BUILD_FOLDER
+
+    git remote add upstream https://github.com/reactwindows/react-native-windows.git
 
     cd $Env:APPVEYOR_BUILD_FOLDER
 
-    git fetch -qf origin +refs/pull/899/merge
+    git fetch -qf upstream +refs/pull/899/merge
 
     git checkout -qf FETCH_HEAD
 
