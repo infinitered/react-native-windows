@@ -3,22 +3,56 @@
  * https://github.com/facebook/react-native
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   View,
-} from 'react-native';
-import DeviceInfo from 'react-native-device-info';
+  Picker
+} from 'react-native'
+import DeviceInfo from 'react-native-device-info'
 
 class Playground extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
-    DeviceInfo.getConnectedDevices((devices) => {console.info(devices)});
+    this.state = {
+      devices: [],
+      selectedDevice: null
+    }
+    DeviceInfo.getConnectedDevices((devices) => { this.setState({devices: devices}) })
+    this.renderDevices = this.renderDevices.bind(this)
+    this.renderDevice = this.renderDevice.bind(this)
+    this.changeSelection = this.changeSelection.bind(this)
   }
 
-  render() {
+  changeSelection (value) {
+    this.setState({selectedDevice: value})
+  }
+
+  renderDevices () {
+    if (this.state.devices && this.state.devices.length > 0) {
+      return (
+        <Picker onValueChange={this.changeSelection} selectedValue={this.state.selectedDevice}>
+          {this.state.devices.map((device) => this.renderDevice(device))}
+        </Picker>
+      )
+    } else {
+      return (
+        <Picker />
+      )
+    }
+  }
+
+  renderDevice (device) {
+    if (device && device.Name && device.DeviceId) {
+      return (
+        <Picker.Item label={device.Name} value={device.DeviceId} key={device.DeviceId} />
+      )
+    }
+  }
+
+  render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -33,8 +67,11 @@ class Playground extends Component {
         <Text style={styles.instructions}>
           Press Ctrl+D or Ctrl+M for dev menu
         </Text>
+        <View style={{flex: 1}}>
+          {this.renderDevices()}
+        </View>
       </View>
-    );
+    )
   }
 }
 
