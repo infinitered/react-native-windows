@@ -21,6 +21,7 @@
     "ReactWindows/ReactNative.Shared",
     "ReactWindows/ChakraBridge",
     "ReactWindows/ReactNative.Net46",
+    "ReactWindows/ChakraCore",
     "local-cli",
     "README.md"
   ],
