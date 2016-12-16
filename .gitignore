@@ -99,7 +99,7 @@ _ReSharper*/
 *~
 
 #NuGet
-packages/
+/ReactWindows/**/packages/
 *.nupkg
 
 #ncrunch
