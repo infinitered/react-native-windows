@@ -295,6 +295,13 @@ namespace ReactNative.DevSupport
 
                 foreach (var option in options)
                 {
+                    option.AsyncInfo = _dismissDevOptionsDialog;
+                }
+#else
+                var asyncInfo = _devOptionsDialog.ShowDialog();
+
+                foreach (var option in options)
+                {
                     option.HideDialog = _dismissDevOptionsDialog;
                 }
 #else
