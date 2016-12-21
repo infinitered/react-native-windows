@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const build = require('./utils/build');
 const deploy = require('./utils/deploy');
 
-function runWindows(config, args, options) {
+function runWpf(config, args, options) {
   // Fix up options
   options.root = options.root || process.cwd();
   if (options.debug && options.release) {
@@ -14,7 +14,7 @@ function runWindows(config, args, options) {
 
   const slnFile = build.getSolutionFile(options);
   if (!slnFile) {
-    console.error(chalk.red('Visual Studio Solution file not found. Maybe run "react-native windows" first?'));
+    console.error(chalk.red('Visual Studio Solution file not found. Maybe run "react-native wpf" first?'));
     return;
   }
 
@@ -47,8 +47,8 @@ function runWindows(config, args, options) {
 }
 
 /*
-// Example of running the Windows Command
-runWindows({
+// Example of running the WPF Command
+runWpf({
   root: 'C:\\github\\hack\\myapp',
   debug: true,
   arch: 'x86',
@@ -71,15 +71,15 @@ runWindows({
  *    proxy: Boolean - Run using remote JS proxy
  */
 module.exports = {
-  name: 'run-windows',
+  name: 'run-wpf',
   description: 'builds your app and starts it on a connected Windows desktop, emulator or device!',
-  func: runWindows,
+  func: runWpf,
   options: [{
     command: '--release',
     description: 'Specifies a release build',
   }, {
     command: '--root [string]',
-    description: 'Override the root directory for the windows build which contains the windows folder.',
+    description: 'Override the root directory for the windows build which contains the wpf folder.',
   }, {
     command: '--arch [string]',
     description: 'The build architecture (ARM, x86, x64)',

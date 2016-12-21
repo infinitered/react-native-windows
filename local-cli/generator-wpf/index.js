@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const uuid = require('uuid');
 const yeoman = require('yeoman-generator');
+const destFolder = 'wpf'
 
 const REACT_NATIVE_PACKAGE_JSON_PATH = function() {
   return path.resolve(
@@ -30,7 +31,7 @@ module.exports = yeoman.Base.extend({
   configuring: function() {
     this.fs.copy(
       this.templatePath('_gitignore'),
-      this.destinationPath(path.join('windows', '.gitignore'))
+      this.destinationPath(path.join(destFolder, '.gitignore'))
     );
   },
 
@@ -47,34 +48,34 @@ module.exports = yeoman.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath(path.join('src', '**')),
-      this.destinationPath(path.join('windows', this.name)),
+      this.destinationPath(path.join(destFolder, this.name)),
       templateVars
     );
 
     this.fs.copyTpl(
       this.templatePath('index.windows.bundle'),
-      this.destinationPath(path.join('windows', this.name, 'ReactAssets', 'index.windows.bundle')),
+      this.destinationPath(path.join(destFolder, this.name, 'ReactAssets', 'index.windows.bundle')),
       templateVars
     );
 
     this.fs.copyTpl(
       this.templatePath(path.join('proj', 'MyApp.csproj')),
-      this.destinationPath(path.join('windows', this.name, this.name + '.csproj'))
+      this.destinationPath(path.join(destFolder, this.name, this.name + '.csproj'))
     , templateVars);
 
     this.fs.copyTpl(
       this.templatePath(path.join('proj', 'MyApp.sln')),
-      this.destinationPath(path.join('windows', this.name + '.sln'))
+      this.destinationPath(path.join(destFolder, this.name + '.sln'))
     , templateVars);
 
     this.fs.copy(
       this.templatePath(path.join('assets', '**')),
-      this.destinationPath(path.join('windows', this.name, 'Assets'))
+      this.destinationPath(path.join(destFolder, this.name, 'Assets'))
     );
 
     this.fs.copy(
       this.templatePath(path.join('keys', 'MyApp_TemporaryKey.pfx')),
-      this.destinationPath(path.join('windows', this.name, this.name + '_TemporaryKey.pfx'))
+      this.destinationPath(path.join(destFolder, this.name, this.name + '_TemporaryKey.pfx'))
     );
   },
 
@@ -107,8 +108,8 @@ module.exports = yeoman.Base.extend({
   },
 
   end: function() {
-    const projectPath = path.resolve(this.destinationRoot(), 'windows', this.name);
-    this.log(chalk.white.bold('To run your app on UWP:'));
-    this.log(chalk.white('   react-native run-windows'));
+    const projectPath = path.resolve(this.destinationRoot(), destFolder, this.name);
+    this.log(chalk.white.bold('To run your app on WPF:'));
+    this.log(chalk.white('   react-native run-wpf'));
   }
 });
