@@ -1,7 +1,7 @@
 {
-  "name": "rnpm-plugin-windows",
-  "version": "0.2.3",
-  "description": "rnpm plugin that generates a Windows template project",
+  "name": "rnpm-plugin-wpf",
+  "version": "0.1.0",
+  "description": "rnpm plugin that generates a Windows template project with WPF",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

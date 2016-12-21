@@ -22,7 +22,7 @@ const REACT_NATIVE_WINDOWS_GENERATE_PATH = function() {
     'node_modules',
     'react-native-windows',
     'local-cli',
-    'generate-windows.js'
+    'generate-uwp.js'
   );
 };
 
@@ -52,7 +52,7 @@ function getMatchingVersion(version) {
           throw new Error(`Could not find react-native-windows@${version}. ` +
             `Latest version of react-native-windows is ${latestVersion}, try switching to ` +
             `react-native@${semver.major(latestVersion)}.${semver.minor(latestVersion)}.*.`);
-        });          
+        });
       }
     });
 }
