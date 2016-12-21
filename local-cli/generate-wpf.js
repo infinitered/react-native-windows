@@ -19,9 +19,9 @@ function generateWindows (projectDir, name, ns) {
   }
 
   const env = yeoman.createEnv();
-  const generatorPath = path.join(__dirname, 'generator-windows');
-  env.register(generatorPath, 'react:windows');
-  const args = ['react:windows', name, ns].concat(process.argv.slice(4));
+  const generatorPath = path.join(__dirname, 'generator-wpf');
+  env.register(generatorPath, 'react:wpf');
+  const args = ['react:wpf', name, ns].concat(process.argv.slice(4));
   env.run(args, { ns: ns }, function () {
     process.chdir(oldCwd);
   });

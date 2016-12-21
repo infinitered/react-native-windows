@@ -22,7 +22,7 @@ const REACT_NATIVE_WINDOWS_GENERATE_PATH = function() {
     'node_modules',
     'react-native-windows',
     'local-cli',
-    'generate-uwp.js'
+    'generate-wpf.js'
   );
 };
 
