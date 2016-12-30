@@ -10,7 +10,7 @@ const REQUIRED_VERSIONS = {
     os: '6.3',
     msbuild: '14.0',
     visualstudio: '14.0',
-    windowssdk: '10.0',
+    windowssdk: '8.1',
     phonesdk: '10.0'
   }
 };

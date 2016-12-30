@@ -41,8 +41,8 @@ module.exports = yeoman.Base.extend({
     const templateVars = { name: this.name, ns: this.options.ns, projectGuid, packageGuid };
 
     this.fs.copyTpl(
-      this.templatePath('index.windows.js'),
-      this.destinationPath('index.windows.js'),
+      this.templatePath('index.wpf.js'),
+      this.destinationPath('index.wpf.js'),
       templateVars
     );
 
@@ -53,8 +53,8 @@ module.exports = yeoman.Base.extend({
     );
 
     this.fs.copyTpl(
-      this.templatePath('index.windows.bundle'),
-      this.destinationPath(path.join(destFolder, this.name, 'ReactAssets', 'index.windows.bundle')),
+      this.templatePath('index.wpf.bundle'),
+      this.destinationPath(path.join(destFolder, this.name, 'ReactAssets', 'index.wpf.bundle')),
       templateVars
     );
 
