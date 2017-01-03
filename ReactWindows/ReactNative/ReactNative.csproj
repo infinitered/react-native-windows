@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -136,11 +136,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LoggingActivityBuilderExtensions.tt</DependentUpon>
     </Compile>
+    <Compile Include="UIManager\BorderedCanvasManager.cs" />
+    <Compile Include="LifecycleState.cs" />
+    <Compile Include="IReactInstanceManager.cs" />
+    <Compile Include="Modules\Core\ExceptionsManagerModule.cs" />
     <Compile Include="Modules\WebSocket\WebSocketModule.cs" />
     <Compile Include="Shell\MainReactPackage.cs" />
     <Compile Include="Touch\JavaScriptResponderHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tracing\Tracer.cs" />
+    <Compile Include="UIManager\IViewManager.cs" />
+    <Compile Include="UIManager\IViewParentManager.cs" />
+    <Compile Include="UIManager\DependencyObjectViewManager.cs" />
+    <Compile Include="UIManager\ViewParentManagerExtensions.cs" />
     <Compile Include="UIManager\BaseViewManager.cs" />
     <Compile Include="UIManager\UIManagerModule.cs" />
     <Compile Include="Views\Flip\ReactFlipViewManager.cs" />
@@ -151,10 +159,42 @@
     <Compile Include="Views\Progress\ReactProgressRingShadowNode.cs" />
     <Compile Include="Views\Slider\ReactSliderManager.cs" />
     <Compile Include="Views\Split\Events\SplitViewClosedEvent.cs" />
+    <Compile Include="UIManager\UIImplementationProvider.cs" />
+    <Compile Include="Views\Image\ReactImageLoadEvent.cs" />
+    <Compile Include="Views\Image\ReactImageManager.cs" />
     <Compile Include="Views\Picker\ReactPickerManager.cs" />
     <Compile Include="Views\Picker\ReactPickerShadowNode.cs" />
     <Compile Include="Views\Split\Events\SplitViewOpenedEvent.cs" />
     <Compile Include="Views\Split\ReactSplitViewManager.cs" />
+    <Compile Include="Views\TextInput\InputScopeHelpers.cs" />
+    <Compile Include="Views\TextInput\ReactPasswordBoxManager.cs" />
+    <Compile Include="Views\TextInput\ReactPasswordBoxShadowNode.cs" />
+    <Compile Include="Views\TextInput\ReactTextBox.cs" />
+    <Compile Include="Views\TextInput\ReactTextChangedEvent.cs" />
+    <Compile Include="Views\TextInput\ReactTextInputBlurEvent.cs" />
+    <Compile Include="Views\TextInput\ReactTextInputEndEditingEvent.cs" />
+    <Compile Include="Views\TextInput\ReactTextInputFocusEvent.cs" />
+    <Compile Include="Views\TextInput\ReactTextInputSelectionEvent.cs" />
+    <Compile Include="Views\TextInput\ReactTextInputSubmitEditingEvent.cs" />
+    <Compile Include="Views\Text\FontStyleHelpers.cs" />
+    <Compile Include="UIManager\RootViewHelper.cs" />
+    <Compile Include="UIManager\RootViewManager.cs" />
+    <Compile Include="UIManager\SimpleViewManager.cs" />
+    <Compile Include="UIManager\IPropertySetter.cs" />
+    <Compile Include="UIManager\LayoutShadowNode.cs" />
+    <Compile Include="UIManager\NativeViewHierarchyOptimizer.cs" />
+    <Compile Include="UIManager\PropertySetter.cs" />
+    <Compile Include="UIManager\NativeViewHierarchyManager.cs" />
+    <Compile Include="UIManager\ReactShadowNode.cs" />
+    <Compile Include="UIManager\ShadowNodeRegistry.cs" />
+    <Compile Include="UIManager\UIImplementation.cs" />
+    <Compile Include="UIManager\UIManagerModule.cs" />
+    <Compile Include="UIManager\UIManagerModule.Constants.cs" />
+    <Compile Include="UIManager\UIViewOperationQueue.cs" />
+    <Compile Include="UIManager\ViewParentManager.cs" />
+    <Compile Include="UIManager\PanelViewParentManager.cs" />
+    <Compile Include="UIManager\ViewManager.cs" />
+    <Compile Include="UIManager\ViewManagerRegistry.cs" />
     <Compile Include="Views\Scroll\ReactScrollViewManager.cs" />
     <Compile Include="Views\Switch\ReactSwitchManager.cs" />
     <Compile Include="Views\Switch\ReactSwitchShadowNode.cs" />
@@ -163,6 +203,9 @@
     <Compile Include="Views\Text\ReactTextCompoundView.cs" />
     <Compile Include="Views\Text\ReactTextShadowNode.cs" />
     <Compile Include="Views\Text\ReactTextViewManager.cs" />
+    <Compile Include="Views\Text\ReactSpanViewManager.cs" />
+    <Compile Include="Views\View\ReactViewManager.cs" />
+    <Compile Include="Views\TextInput\ReactTextInputManager.cs" />
     <Compile Include="Views\Web\Events\WebViewLoadingErrorEvent.cs" />
     <Compile Include="Views\Web\Events\WebViewLoadingEvent.cs" />
     <Compile Include="Views\Web\ReactWebViewManager.cs" />

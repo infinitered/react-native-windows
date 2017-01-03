@@ -31,6 +31,7 @@ namespace ReactNative.UIManager.LayoutAnimation
 
 #if WINDOWS_UWP
             return Observable.FromEventPattern<object>(
+#if WINDOWS_UWP
                 h => _storyboard.Completed += h,
                 h => _storyboard.Completed -= h)
 #else
