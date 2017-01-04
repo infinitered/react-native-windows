@@ -5,15 +5,9 @@ using System.Collections.Generic;
 
 namespace <%= ns %>
 {
-    class MainPage : ReactPage
+    internal class AppReactPage : ReactPage
     {
-        public override string MainComponentName
-        {
-            get
-            {
-                return "<%= name %>";
-            }
-        }
+        public override string MainComponentName => "<%= name %>";
 
 #if BUNDLE
         public override string JavaScriptBundleFile
@@ -25,16 +19,10 @@ namespace <%= ns %>
         }
 #endif
 
-        public override List<IReactPackage> Packages
+        public override List<IReactPackage> Packages => new List<IReactPackage>
         {
-            get
-            {
-                return new List<IReactPackage>
-                {
-                    new MainReactPackage(),
-                };
-            }
-        }
+            new MainReactPackage(),
+        };
 
         public override bool UseDeveloperSupport
         {
@@ -48,5 +36,4 @@ namespace <%= ns %>
             }
         }
     }
-
 }

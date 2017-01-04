@@ -1,21 +1,16 @@
-﻿using ReactNative;
-using ReactNative.Modules.Launch;
-using System;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace <%= ns %>
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    public partial class App : Application
     {
-        private readonly ReactPage _reactPage;
+        private readonly AppReactPage _reactPage = new AppReactPage();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -23,67 +18,48 @@ namespace <%= ns %>
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            this.Resuming += OnResuming;
-
-            _reactPage = new MainPage();
         }
 
         /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
+        /// Override method fired prior to the Startup event when the Run method of the Application object is called...
         /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        /// <param name="e"></param>
+        protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnLaunched(e);
-            OnCreate(e.Arguments);
+            base.OnStartup(e);
+            OnCreate(e.Args);
         }
 
         /// <summary>
-        /// Invoked when the application is activated.
-        /// </summary>
-        /// <param name="args">The activated event arguments.</param>
-        protected override void OnActivated(IActivatedEventArgs args)
-        {
-            base.OnActivated(args);
-
-            switch (args.Kind)
-            {
-                case ActivationKind.Protocol:
-                case ActivationKind.ProtocolForResults:
-                    var protocolArgs = (IProtocolActivatedEventArgs)args;
-                    LauncherModule.SetActivatedUrl(protocolArgs.Uri.AbsoluteUri);
-                    break;
-            }
-
-            if (args.PreviousExecutionState != ApplicationExecutionState.Running &&
-                args.PreviousExecutionState != ApplicationExecutionState.Suspended)
-            {
-                OnCreate(null);
-            }
-        }
-
-        /// <summary>
-        /// Called whenever the app is opened to initia
+        /// Called whenever the app is opened to initialized...
         /// </summary>
         /// <param name="arguments"></param>
-        private void OnCreate(string arguments)
+        private void OnCreate(string[] arguments)
         {
-            _reactPage.OnResume(Exit);
+            var shellWindow = Application.Current.MainWindow;
 
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (shellWindow == null)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                shellWindow = new Window
+                {
+                    ShowActivated = true,
+                    ShowInTaskbar = true,
+                    Title = "<%= ns %>",
+                    Height = 768,
+                    Width = 1024,
+                    WindowStartupLocation = WindowStartupLocation.CenterScreen
+                };
+
+                Application.Current.MainWindow = shellWindow;
             }
 
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                AppViewBackButtonVisibility.Visible;
-#endif
+            //Show Window if it is not already active...
+            if (!shellWindow.IsLoaded)
+            {
+                shellWindow.Show();
+            }
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = shellWindow.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -97,7 +73,7 @@ namespace <%= ns %>
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                shellWindow.Content = rootFrame;
             }
 
             if (rootFrame.Content == null)
@@ -109,7 +85,7 @@ namespace <%= ns %>
             }
 
             // Ensure the current window is active
-            Window.Current.Activate();
+            shellWindow.Activate();
         }
 
         /// <summary>
@@ -119,29 +95,7 @@ namespace <%= ns %>
         /// <param name="e">Details about the navigation failure</param>
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
-
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            _reactPage.OnSuspend();
-        }
-
-        /// <summary>
-        /// Invoked when application execution is being resumed.
-        /// </summary>
-        /// <param name="sender">The source of the resume request.</param>
-        /// <param name="e">Details about the resume request.</param>
-        private void OnResuming(object sender, object e)
-        {
-            _reactPage.OnResume(Exit);
+            throw new Exception("Failed to load Page...");
         }
     }
 }
