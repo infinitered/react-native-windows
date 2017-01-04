@@ -71,12 +71,12 @@ module.exports = yeoman.Base.extend({
 
     this.fs.copyTpl(
       this.templatePath(path.join('proj', 'App.config')),
-      this.destinationPath(path.join(destFolder, 'App.config'))
+      this.destinationPath(path.join(destFolder, this.name, 'App.config'))
     , templateVars)
 
     this.fs.copyTpl(
       this.templatePath(path.join('proj', 'packages.config')),
-      this.destinationPath(path.join(destFolder, 'packages.config'))
+      this.destinationPath(path.join(destFolder, this.name, 'packages.config'))
     , templateVars)
 
     this.fs.copyTpl(
